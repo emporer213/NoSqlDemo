@@ -1,0 +1,35 @@
+﻿<h1 mat-dialog-title>Create New Workspace</h1>
+<div mat-dialog-content>
+  <form [formGroup]="workspaceForm">
+    <p> Workspace </p>
+    <mat-form-field appearance="fill">
+      <mat-label> Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <div formArrayName="windows">
+      <h2>Windows</h2>
+      <button mat-raised-button (click)="addWindow()">+ add another window</button>
+
+      <ng-container *ngFor="let window of windows.controls; let i=index" formGroupName="{{i}}">
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label> Title</mat-label>
+            <input matInput formControlName="title">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label> X Position</mat-label>
+            <input matInput formControlName="positionX">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label> Y Position</mat-label>
+            <input matInput formControlName="positionY">
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="workspaceForm.value" cdkFocusInitial>Ok</button>
+</div>

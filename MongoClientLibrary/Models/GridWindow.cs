@@ -5,27 +5,25 @@ namespace MongoClientLibrary.Models;
 
 public class GridWindow : IWindow
 {
-    public GridWindow(string title, (int, int) position, List<string> columnHeader, List<string> rowHeader)
+    public GridWindow(string title, (int, int) position, List<string> columnHeaders, List<string> rowHeaders)
     {
         Title = title;
         Position = position;
-        ColumnHeader = columnHeader;
-        RowHeader = rowHeader;
-        Id = ObjectId.GenerateNewId();
+        ColumnHeaders = columnHeaders;
+        RowHeaders = rowHeaders;
+        Id = ObjectId.GenerateNewId().ToString();
     }
 
     [BsonId]
-    public ObjectId Id { get; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Id { get; }
     
-    [BsonElement]
     public string Title { get; }
     
-    [BsonElement]
     public (int, int) Position { get; set; }
     
-    [BsonElement]
-    public List<string> ColumnHeader { get; }
+    public List<string> ColumnHeaders { get; }
     
-    [BsonElement]
-    public List<string> RowHeader { get; }
+    
+    public List<string> RowHeaders { get; }
 }

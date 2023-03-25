@@ -4,7 +4,7 @@ namespace MongoClientLibrary.Models;
 
 public interface IWindow
 {
-    ObjectId Id { get; }
+    string Id { get; }
     string Title { get; }
     (int, int) Position { get; set; }
 }

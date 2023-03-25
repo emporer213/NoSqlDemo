@@ -6,8 +6,8 @@ namespace MongoClientLibrary;
 public interface IMongoService
 {
     Task<List<Workspace>> GetAsync();
-    Task<Workspace?> GetAsync(ObjectId id);
+    Task<Workspace?> GetAsync(string id);
     Task CreateAsync(Workspace newWorkspace);
-    Task UpdateAsync(ObjectId id, Workspace updatedWorkspace);
-    Task RemoveAsync(ObjectId id);
+    Task UpdateAsync(string id, Workspace updatedWorkspace);
+    Task RemoveAsync(string id);
 }

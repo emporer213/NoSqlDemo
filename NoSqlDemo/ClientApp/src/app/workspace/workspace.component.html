@@ -1,10 +1,27 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Workspaces</title>
-</head>
-<body>
+﻿<h1 id="tableLabel">Workspaces</h1>
 
-</body>
-</html>
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!workspaces"><em>Loading...</em></p>
+
+<button mat-button (click)="onCreate()">Create Workspace</button>
+
+<table mat-table [dataSource]="workspaces">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let workspace"> {{workspace.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let workspace"> {{workspace.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="windows">
+    <th mat-header-cell *matHeaderCellDef> Windows </th>
+    <td mat-cell *matCellDef="let workspace"> <mat-list><mat-list-item *ngFor="let window of workspace.windows"> {{window.title}} </mat-list-item> </mat-list> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let rowData; columns: columnsToDisplay"></tr>
+</table>

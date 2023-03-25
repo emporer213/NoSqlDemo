@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoClientLibrary.Models;
 
@@ -9,11 +10,13 @@ public class ChartWindow : IWindow
         Title = title;
         Position = position;
         ChartType = chartType;
-        Id = ObjectId.GenerateNewId();
+        Id = ObjectId.GenerateNewId().ToString();
     }
-
-    public ObjectId Id { get; }
-    public string Title { get; }
+    
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+    public string Title { get; set; }
     public (int, int) Position { get; set; }
     public ChartType ChartType { get; set; }
 }

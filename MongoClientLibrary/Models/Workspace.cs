@@ -7,16 +7,17 @@ public class Workspace : IWorkspace
 {
     public Workspace(string name)
     {
-        Id = ObjectId.GenerateNewId();
+        Id = ObjectId.GenerateNewId().ToString();
         Name = name;
     }
     
     [BsonId]
-    public ObjectId Id { get; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
     
     [BsonElement]
     public string Name { get; set; }
     
     [BsonElement]
-    public List<IWindow> Windows { get; } = new();
+    public List<IWindow> Windows { get; set; } = new();
 }
