@@ -3,7 +3,7 @@ import {Workspace} from './models/workspace';
 import {MatDialog} from '@angular/material/dialog';
 import {WorkspaceService} from './services/workspace.service';
 import {NewWorkspaceDialog} from './new-workspace-dialog/new-workspace-dialog.component';
-import {WindowModel} from './models/window.model';
+import {WindowModel, WindowModelRaw} from './models/window.model';
 @Component({
   selector: 'app-workspace-component',
   templateUrl: './workspace.component.html',
@@ -29,13 +29,16 @@ export class WorkspaceComponent implements OnInit {
   }
 
   saveNewWorkspace(result: any) : void {
-    let {name, windows} : {name: string; windows: WindowModel[]} = result;
+    let {name, windows} : {name: string; windows: WindowModelRaw[]} = result;
+
+    let windowsAsss = windows.map(item => {return {title: item.title, position: [item.positionX, item.positionY]} as WindowModel})
+
     name = name.trim();
     if (!name) {
       return;
     }
 
-    const newWorkspace: Workspace = { name, windows } as Workspace;
+    const newWorkspace: Workspace = { name, windows: windowsAsss } as Workspace;
     this.workspaceService
       .addWorkspace(newWorkspace)
       .subscribe(workspace => this.workspaces.push(workspace));

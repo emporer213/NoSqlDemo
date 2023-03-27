@@ -7,6 +7,6 @@ public interface IWorkspace
     string Id { get; }
     string Name { get; set; }
     
-    List<IWindow> Windows { get; }
+    List<Window> Windows { get; }
 
 }

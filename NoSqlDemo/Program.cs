@@ -1,5 +1,6 @@
 using MongoClientLibrary;
 using MongoClientLibrary.Models;
+using Newtonsoft;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,10 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.Configure<MongoDbConfiguration>(
     builder.Configuration.GetSection("MongoDbConfiguration"));
 
 builder.Services.AddSingleton<IMongoService, MongoService>();
+
 
 var app = builder.Build();
 

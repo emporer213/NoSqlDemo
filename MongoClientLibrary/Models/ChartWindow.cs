@@ -3,20 +3,12 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoClientLibrary.Models;
 
-public class ChartWindow : IWindow
+public class ChartWindow : Window
 {
-    public ChartWindow(string title, (int, int) position, ChartType chartType)
+    public ChartWindow(string title, ChartType chartType) : base(title)
     {
-        Title = title;
-        Position = position;
         ChartType = chartType;
-        Id = ObjectId.GenerateNewId().ToString();
     }
     
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
-    public string Title { get; set; }
-    public (int, int) Position { get; set; }
     public ChartType ChartType { get; set; }
 }

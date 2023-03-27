@@ -19,5 +19,5 @@ public class Workspace : IWorkspace
     public string Name { get; set; }
     
     [BsonElement]
-    public List<IWindow> Windows { get; set; } = new();
+    public List<Window> Windows { get; set; } = new();
 }
